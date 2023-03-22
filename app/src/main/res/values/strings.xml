@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">keystone-sdk-android-demo</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Player</string>
+    <string name="second_fragment_label">Scanner</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="zxing_msg_default_status">Scan the QR code</string>
+</resources>
