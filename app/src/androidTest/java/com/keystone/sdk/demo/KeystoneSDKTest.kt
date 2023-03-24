@@ -31,7 +31,7 @@ class KeystoneSDKTest {
         val ur = sdk.decodeQR("UR:CRYPTO-MULTI-ACCOUNTS/OTADCYJOKBWEJZAOLYTAADDLOXAOWKAXHDCXDPFNJYDNMKYTWDKTETWZHTATVDADNYJTSPWSBDAYWNHSJEFTFSDTFMCXBEPLYKRYAMTAADDYOTADLOCSDWYKCFADYKYKAEYKAEYKAOCYJOKBWEJZAXAAASIHGUGWGSDPDYAXISGRIHKKJKJYJLJTIHSSJYKSGT")
         if (ur != null) {
             val accounts = sdk.parseMultiAccounts(ur.cbor)
-            println(accounts.keys.contentToString())
+            println(accounts)
             assertEquals(
                 "Keystone",
                 accounts.device

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import com.keystone.sdk.KeystoneEthereumSDK
+import com.keystone.sdk.KeystoneSDK
 import com.keystone.sdk.KeystoneSolanaSDK
 import com.keystone.sdk.demo.databinding.FragmentPlayerBinding
 import com.sparrowwallet.hummingbird.UREncoder
@@ -62,9 +63,9 @@ class PlayerFragment : Fragment() {
         val address = ""
         val origin = "solflare"
         val signType = KeystoneSolanaSDK.SignType.Message
-        val sdk = KeystoneSolanaSDK()
-        sdk.setMaxFragmentLen(100)
-        return sdk.generateSignRequest(requestId, signData, path, xfp, address, origin, signType)
+        val sdk = KeystoneSDK(arrayOf(KeystoneSDK.ChainType.SOL))
+        sdk.maxFragmentLen = 100
+        return sdk.sol.generateSignRequest(requestId, signData, path, xfp, address, origin, signType)
     }
 
     private fun genEthQRCode(): UREncoder {
@@ -75,9 +76,11 @@ class PlayerFragment : Fragment() {
         val xfp = "707EED6C"
         val address = ""
         val origin = "eth"
-        val sdk = KeystoneEthereumSDK()
-        sdk.setMaxFragmentLen(500)
-        return sdk.generateSignRequest(
+
+        // tx to ur encoder
+        val sdk = KeystoneSDK(arrayOf(KeystoneSDK.ChainType.ETH))
+        sdk.maxFragmentLen = 500
+        return sdk.eth.generateSignRequest(
             requestId,
             signData,
             dataType,
@@ -93,8 +96,9 @@ class PlayerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val imageView: ImageView = view.findViewById(R.id.qrcode)
-        val qr = genSolQRCode()
 
+        // tx to ur encoder, to generate qr code
+        val qr = genSolQRCode()
         imageView.setImageBitmap(displayQRCode(qr.nextPart()))
 
         val inst = this
