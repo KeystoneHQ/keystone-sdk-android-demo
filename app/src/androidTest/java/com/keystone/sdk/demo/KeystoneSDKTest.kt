@@ -42,4 +42,19 @@ class KeystoneSDKTest {
             )
         }
     }
+
+    @Test
+    fun parseMultiAccountsWithXPub() {
+        val sdk = KeystoneSDK()
+        val accounts = sdk.parseMultiAccounts("a3011aa424853c0281d9012fa4035821034af544244d31619d773521a1a366373c485ff89de50bea543c2b14cccfbb6a500458208dc2427d8ab23caab07729f88f089a3cfa2cfffcd7d1e507f983c0d44a5dbd3506d90130a10186182cf500f500f5081a149439dc03686b657973746f6e65")
+        println(accounts)
+        assertEquals(
+            "8dc2427d8ab23caab07729f88f089a3cfa2cfffcd7d1e507f983c0d44a5dbd35",
+            accounts.keys[0].getChainCode()
+        )
+        assertEquals(
+            "xpub6BoYPFH1MivLdh2BWZuRu6LfuaVSkVak5wsDxjjkAWcUM2QPKyeCHXMgDfRJFvKZhqA4vM5vsgcD6C5ot9eThnFHstgPntNzBLUdLeKS7Zt",
+            accounts.keys[0].getExtendedPublicKey()
+        )
+    }
 }
