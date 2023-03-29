@@ -7,7 +7,6 @@ import com.keystone.sdk.KeystoneSDK
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import com.keystone.sdk.KeystoneSolanaSDK
 import org.junit.Assert.*
 
 @RunWith(AndroidJUnit4::class)
