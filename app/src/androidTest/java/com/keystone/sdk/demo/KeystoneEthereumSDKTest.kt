@@ -13,7 +13,7 @@ import org.junit.Assert.*
 class KeystoneEthereumSDKTest {
     @Test
     fun parseSignature() {
-        val sdk = KeystoneSDK(arrayOf(KeystoneSDK.ChainType.ETH))
+        val sdk = KeystoneSDK()
         val sign = sdk.eth.parseSignature("a201d82550cbad90e27e774b6b992c7b0dff204d13025841c127cf3bbd7f6e405995797d4d05bb122688598bf98d7c4b2f7813d84735363a5f7347e3c29d83244b00ff62ae0c717c0c4f7aa9de2bf96da29c1f80ac05d2061b")
         assertEquals(sign.signature, "c127cf3bbd7f6e405995797d4d05bb122688598bf98d7c4b2f7813d84735363a5f7347e3c29d83244b00ff62ae0c717c0c4f7aa9de2bf96da29c1f80ac05d2061b")
         assertEquals(sign.requestId, "cbad90e2-7e77-4b6b-992c-7b0dff204d13")
@@ -29,7 +29,7 @@ class KeystoneEthereumSDKTest {
         val address = ""
         val origin = "eth"
 
-        val sdk = KeystoneSDK(arrayOf(KeystoneSDK.ChainType.ETH))
+        val sdk = KeystoneSDK()
         val res = sdk.eth.generateSignRequest(requestId, signData, dataType, 60, path, xfp, address, origin)
         assertEquals(
             res.nextPart(),

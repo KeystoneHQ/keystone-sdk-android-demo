@@ -63,8 +63,8 @@ class PlayerFragment : Fragment() {
         val address = ""
         val origin = "solflare"
         val signType = KeystoneSolanaSDK.SignType.Message
-        val sdk = KeystoneSDK(arrayOf(KeystoneSDK.ChainType.SOL))
-        sdk.maxFragmentLen = 100
+        val sdk = KeystoneSDK()
+        KeystoneSDK.maxFragmentLen = 100
         return sdk.sol.generateSignRequest(requestId, signData, path, xfp, address, origin, signType)
     }
 
@@ -78,8 +78,8 @@ class PlayerFragment : Fragment() {
         val origin = "eth"
 
         // tx to ur encoder
-        val sdk = KeystoneSDK(arrayOf(KeystoneSDK.ChainType.ETH))
-        sdk.maxFragmentLen = 500
+        val sdk = KeystoneSDK()
+        KeystoneSDK.maxFragmentLen = 500
         return sdk.eth.generateSignRequest(
             requestId,
             signData,
@@ -94,8 +94,8 @@ class PlayerFragment : Fragment() {
 
     private fun genBtcQRCode(): UREncoder {
         val psbt = "70736274FF01007102000000011F907E04BF09D19C9AA9A6A3146F8FFB1FC9E23B581CB40A36F28C0128554D930100000000FFFFFFFF02E80300000000000016001491428416B0F516840B67E56B58C17F2938B843863BC004000000000016001442E7376B213643A36241071463132C77D94B223E000000000001011F45C9040000000000160014192864CD17C8BBC87B24BF812D7EB55A1B05797F220603945B57AD4BAE8836CCA9A54DDE4C759F5B4CEB0E55478031294DCEFE363EABAE18707EED6C540000800000008000000080010000001E0000000000220202AF541BCB89E5384AD417CB2F25C7DAB06FF47AD18F7E30EA3DAE2B769BEC77E418707EED6C540000800000008000000080010000001F00000000".chunked(2).map { it.toInt(16).toByte() }.toByteArray()
-        val sdk = KeystoneSDK(arrayOf(KeystoneSDK.ChainType.BTC))
-        sdk.maxFragmentLen = 300
+        val sdk = KeystoneSDK()
+        KeystoneSDK.maxFragmentLen = 300
         return sdk.btc.generatePSBT(psbt)
     }
 
@@ -105,7 +105,7 @@ class PlayerFragment : Fragment() {
         val imageView: ImageView = view.findViewById(R.id.qrcode)
 
         // tx to ur encoder, to generate qr code
-        val qr = genBtcQRCode()
+        val qr = genEthQRCode()
         imageView.setImageBitmap(displayQRCode(qr.nextPart()))
 
         val inst = this
