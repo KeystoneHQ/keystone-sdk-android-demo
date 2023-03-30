@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.zxing.integration.android.IntentIntegrator
@@ -59,12 +60,16 @@ class ScannerFragment : Fragment() {
         }
 
         // connect wallet (get account information)
-        val decodedQR = sdk.decodeQR(result.contents)
-        if (decodedQR == null) {
-            qrScanIntegrator.initiateScan()
-            return
+        try {
+            val decodedQR = sdk.decodeQR(result.contents)
+            if (decodedQR == null) {
+                qrScanIntegrator.initiateScan()
+                return
+            }
+            val accounts: MultiAccounts = sdk.parseMultiAccounts(decodedQR.cbor)
+            binding.scanResult.text = Gson().toJson(accounts)
+        } catch (err: Exception) {
+            Toast.makeText(binding.root.context, err.message, Toast.LENGTH_LONG).show()
         }
-        val accounts: MultiAccounts = sdk.parseMultiAccounts(decodedQR.cbor)
-        binding.scanResult.text = Gson().toJson(accounts)
     }
 }
