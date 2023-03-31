@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.zxing.integration.android.IntentIntegrator
-import com.keystone.module.MultiAccounts
 import com.keystone.sdk.KeystoneSDK
 import com.keystone.sdk.demo.databinding.FragmentScannerBinding
 
@@ -66,7 +65,7 @@ class ScannerFragment : Fragment() {
                 qrScanIntegrator.initiateScan()
                 return
             }
-            val accounts: MultiAccounts = sdk.parseMultiAccounts(decodedQR.cbor)
+            val accounts = sdk.parseMultiAccounts(decodedQR.cbor)
             binding.scanResult.text = Gson().toJson(accounts)
         } catch (err: Exception) {
             Toast.makeText(binding.root.context, err.message, Toast.LENGTH_LONG).show()
