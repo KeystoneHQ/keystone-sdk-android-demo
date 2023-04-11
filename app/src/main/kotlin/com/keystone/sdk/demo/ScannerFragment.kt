@@ -59,8 +59,8 @@ class ScannerFragment : Fragment() {
         }
 
         // connect wallet (get account information)
+        val decodedQR = sdk.decodeQR(result.contents)
         try {
-            val decodedQR = sdk.decodeQR(result.contents)
             if (decodedQR == null) {
                 qrScanIntegrator.initiateScan()
                 return
@@ -68,6 +68,7 @@ class ScannerFragment : Fragment() {
             val accounts = sdk.parseMultiAccounts(decodedQR.cbor)
             binding.scanResult.text = Gson().toJson(accounts)
         } catch (err: Exception) {
+            binding.scanResult.text = Gson().toJson(decodedQR)
             Toast.makeText(binding.root.context, err.message, Toast.LENGTH_LONG).show()
         }
     }

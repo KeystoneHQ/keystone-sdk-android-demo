@@ -14,6 +14,7 @@ import com.google.zxing.qrcode.QRCodeWriter
 import com.keystone.module.CosmosAccount
 import com.keystone.module.CosmosSignRequest
 import com.keystone.sdk.KeystoneCosmosSDK
+import com.keystone.module.TokenInfo
 import com.keystone.sdk.KeystoneEthereumSDK
 import com.keystone.sdk.KeystoneSDK
 import com.keystone.sdk.KeystoneSolanaSDK
@@ -125,13 +126,30 @@ class PlayerFragment : Fragment() {
         return sdk.btc.generatePSBT(psbt)
     }
 
+    private fun genTronQRCode(): UREncoder {
+        val requestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+        val signData = "0a0207902208e1b9de559665c6714080c49789bb2c5aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a1541c79f045e4d48ad8dae00e6a6714dae1e000adfcd1215410d292c98a5eca06c2085fff993996423cf66c93b2244a9059cbb0000000000000000000000009bbce520d984c3b95ad10cb4e32a9294e6338da300000000000000000000000000000000000000000000000000000000000f424070c0b6e087bb2c90018094ebdc03"
+        val path = "m/44'/195'/0'/0'"
+        val xfp = "12121212"
+        val tokenInfo = TokenInfo(
+            "TONE",
+            "TronOne",
+            18
+        )
+        val address = ""
+        val origin = ""
+        val sdk = KeystoneSDK()
+        KeystoneSDK.maxFragmentLen = 300
+        return sdk.tron.generateSignRequest(requestId, signData, path, xfp, tokenInfo, address, origin)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val imageView: ImageView = view.findViewById(R.id.qrcode)
 
         // tx to ur encoder, to generate qr code
-        val qr = genEthQRCode()
+        val qr = genTronQRCode()
         imageView.setImageBitmap(displayQRCode(qr.nextPart()))
 
         val inst = this
