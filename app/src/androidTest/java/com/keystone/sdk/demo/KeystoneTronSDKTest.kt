@@ -43,7 +43,7 @@ class KeystoneTronSDKTest {
         KeystoneSDK.maxFragmentLen = 100
         val res = sdk.tron.generateSignRequest(requestId, signData, path, xfp, tokenInfo, address, origin)
         assertEquals(
-            "ur:tron-sign-request/1-4/lpadaacfadlacycsidenuehdhnotadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohkadgdkgcpiajljtjyjphsiajyfpieiejpihjkjkcpftcpghfwfpjlemgdglkkgrjleseehkhggojsehfxjkeygsfwfgksjeisghjoisjtfpfeeeghcpdwcpiyihihcpftehdydydydydydydydyqzglknia",
+            "ur:tron-sign-request/1-5/lpadahcfadrtcygakkdwnlhdhtotadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohkadmhkgcpiajljtjyjphsiajyfpieiejpihjkjkcpftcpghfwfpjlemgdglkkgrjleseehkhggojsehfxjkeygsfwfgksjeisghjoisjtfpfeeeghcpdwcpiyihihcpftehdydyosfdcwjo",
             res.nextPart(),
         )
     }
