@@ -43,11 +43,11 @@ class KeystoneAptosSDKTest {
             )
         )
         val aptosSignRequest = AptosSignRequest(
-            signData = "8e53e7b10656816de70824e3016fc1a277e77825e12825dc4f239f418ab2e04e",
-            requestId = "7AFD5E09-9267-43FB-A02E-08C4A09417EC",
-            accounts = accounts,
-            origin = "Petra",
-            dataType = KeystoneAptosSDK.DataType.Single
+            "7AFD5E09-9267-43FB-A02E-08C4A09417EC",
+            "8e53e7b10656816de70824e3016fc1a277e77825e12825dc4f239f418ab2e04e",
+            KeystoneAptosSDK.SignType.Single,
+            accounts,
+            "Petra",
         )
 
         val sdk = KeystoneSDK()

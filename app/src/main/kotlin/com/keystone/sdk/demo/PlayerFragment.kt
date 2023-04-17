@@ -160,7 +160,7 @@ class PlayerFragment : Fragment() {
         val origin = "Petra"
         val sdk = KeystoneSDK()
         KeystoneSDK.maxFragmentLen = 600
-        return sdk.aptos.generateSignRequest(AptosSignRequest(requestId, signData, KeystoneAptosSDK.DataType.Single, accounts, origin))
+        return sdk.aptos.generateSignRequest(AptosSignRequest(requestId, signData, KeystoneAptosSDK.SignType.Single, accounts, origin))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
