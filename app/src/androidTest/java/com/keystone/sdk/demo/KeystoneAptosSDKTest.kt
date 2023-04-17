@@ -46,7 +46,7 @@ class KeystoneAptosSDKTest {
             signData = "8e53e7b10656816de70824e3016fc1a277e77825e12825dc4f239f418ab2e04e",
             requestId = "7AFD5E09-9267-43FB-A02E-08C4A09417EC",
             accounts = accounts,
-            origin = "Keplr",
+            origin = "Petra",
             dataType = KeystoneAptosSDK.DataType.Single
         )
 
@@ -55,7 +55,7 @@ class KeystoneAptosSDKTest {
         val res = sdk.aptos.generateSignRequest(aptosSignRequest)
         assertEquals(
             res.nextPart(),
-            "ur:aptos-sign-request/oladtpdagdknzchyasmoiofxzonbdmayssnbmwchwpaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxlftaaddyoeadlecsdwykcfaokiykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaokiykaeykaeykadykaocykscnayahaalfksfzhshsemeeeydyiaenetiaeheneneeecememecihiaiyeneshseciheyiyiehshseeiyetesieeoeyeseohsihihdyieieeyetdyiheyieesemhsieemidetemesenecdyksfzesemiyesechsiaiyiddyeeiyeteeieeyeyetieiaihesidiehseehsieemiheyhseciaideoeyeeieecihiyieieenhsemiydyidesecesihemececihidideohsemdyahihgrihjojzjpamadiebtteas"
+            "ur:aptos-sign-request/oladtpdagdknzchyasmoiofxzonbdmayssnbmwchwpaohdcxmnguvdpaamhflyjnvdaydkvladjlseoektvdksdavydedauogwcnnefpleprvtglaxlftaaddyoeadlecsdwykcfaokiykaeykaeykaeykaocykscnayaataaddyoeadlecsdwykcfaokiykaeykaeykadykaocykscnayahaalfhdcxpkjycxswlkcmiehgkpwpynnyhydltnoxyanteymuplvtutdebadpmspmkgltmtgdhdcxmsythttkpfgwlrtddeuowlryoxpmkbdrhhqddktlwsutimlbbdmdnnkphyrkftjoahihgdihjyjphsamadjpimreon"
         )
     }
 }

@@ -12,6 +12,11 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.keystone.sdk.KeystoneSDK
 import com.keystone.sdk.demo.databinding.FragmentScannerBinding
 
+data class UR(
+    val type: String,
+    val cbor: String,
+)
+
 class ScannerFragment : Fragment() {
 
     private lateinit var binding: FragmentScannerBinding
@@ -68,7 +73,9 @@ class ScannerFragment : Fragment() {
             val accounts = sdk.parseMultiAccounts(decodedQR)
             binding.scanResult.text = Gson().toJson(accounts)
         } catch (err: Exception) {
-            binding.scanResult.text = Gson().toJson(decodedQR)
+            if (decodedQR != null) {
+                binding.scanResult.text = Gson().toJson(UR(decodedQR.type, decodedQR.cborBytes.toHexString()))
+            }
             Toast.makeText(binding.root.context, err.message, Toast.LENGTH_LONG).show()
         }
     }

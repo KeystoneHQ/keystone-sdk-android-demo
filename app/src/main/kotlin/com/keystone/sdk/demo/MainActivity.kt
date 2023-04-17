@@ -11,6 +11,18 @@ import android.view.Menu
 import android.view.MenuItem
 import com.keystone.sdk.demo.databinding.ActivityMainBinding
 
+
+fun String.decodeHex(): ByteArray {
+    check(length % 2 == 0) { "HexString must have an even length" }
+    return chunked(2)
+        .map { it.toInt(16).toByte() }
+        .toByteArray()
+}
+
+fun ByteArray.toHexString(): String {
+    return joinToString("") { "%02X".format(it) }
+}
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

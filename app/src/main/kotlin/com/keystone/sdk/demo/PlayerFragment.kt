@@ -11,6 +11,8 @@ import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
+import com.keystone.module.AptosAccount
+import com.keystone.module.AptosSignRequest
 import com.keystone.module.CosmosAccount
 import com.keystone.module.CosmosSignRequest
 import com.keystone.module.EthSignRequest
@@ -18,6 +20,7 @@ import com.keystone.module.SolSignRequest
 import com.keystone.sdk.KeystoneCosmosSDK
 import com.keystone.module.TokenInfo
 import com.keystone.module.TronSignRequest
+import com.keystone.sdk.KeystoneAptosSDK
 import com.keystone.sdk.KeystoneEthereumSDK
 import com.keystone.sdk.KeystoneSDK
 import com.keystone.sdk.KeystoneSolanaSDK
@@ -143,13 +146,30 @@ class PlayerFragment : Fragment() {
         ))
     }
 
+    private fun genAptosQRCode(): UREncoder {
+        val requestId = "17467482-2654-4058-972D-F436EFAEB38E"
+        val signData = "B5E97DB07FA0BD0E5598AA3643A9BC6F6693BDDC1A9FEC9E674A461EAA00B1931248CD3D5E09500ACB7082497DEC1B2690384C535F3882ED5D84392370AD0455000000000000000002000000000000000000000000000000000000000000000000000000000000000104636F696E087472616E73666572010700000000000000000000000000000000000000000000000000000000000000010A6170746F735F636F696E094170746F73436F696E0002201248CD3D5E09500ACB7082497DEC1B2690384C535F3882ED5D84392370AD04550880969800000000000A000000000000009600000000000000ACF63C640000000002"
+        val accounts = ArrayList<AptosAccount>();
+        accounts.add(
+            AptosAccount(
+                path = "m/44'/637'/0'/0'/0'",
+                xfp = "F23F9FD2",
+                key = "A5E70D9183F67EC4B86EA70A14C1A385281C6AB96BDE90306C166D9F11F9D91E"
+            )
+        )
+        val origin = "Petra"
+        val sdk = KeystoneSDK()
+        KeystoneSDK.maxFragmentLen = 600
+        return sdk.aptos.generateSignRequest(AptosSignRequest(requestId, signData, KeystoneAptosSDK.DataType.Single, accounts, origin))
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val imageView: ImageView = view.findViewById(R.id.qrcode)
 
         // tx to ur encoder, to generate qr code
-        val qr = genTronQRCode()
+        val qr = genAptosQRCode()
         imageView.setImageBitmap(displayQRCode(qr.nextPart()))
 
         val inst = this
