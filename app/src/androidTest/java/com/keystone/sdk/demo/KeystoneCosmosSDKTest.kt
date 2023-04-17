@@ -5,6 +5,7 @@ import com.keystone.module.CosmosAccount
 import com.keystone.module.CosmosSignRequest
 import com.keystone.sdk.KeystoneCosmosSDK
 import com.keystone.sdk.KeystoneSDK
+import com.sparrowwallet.hummingbird.UR
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,7 +22,8 @@ class KeystoneCosmosSDKTest {
     @Test
     fun parseSignature() {
         val sdk = KeystoneSDK()
-        val cosmosSignature = sdk.cosmos.parseSignature("a301d825507afd5e09926743fba02e08c4a09417ec02584078325c2ea8d1841dbcd962e894ca6ecd5890aa4c1aa9e1eb789cd2d0e9c22ec737c2b4fb9c2defd863cadf914f538330ec42d6c30c04857ee1f06e7f2589d7d903582103f3ded94f2969d76200c6ed5db836041cc815fa62aa791e047905186c07e00275")
+        val ur = UR("cosmos-signature", "a301d825507afd5e09926743fba02e08c4a09417ec02584078325c2ea8d1841dbcd962e894ca6ecd5890aa4c1aa9e1eb789cd2d0e9c22ec737c2b4fb9c2defd863cadf914f538330ec42d6c30c04857ee1f06e7f2589d7d903582103f3ded94f2969d76200c6ed5db836041cc815fa62aa791e047905186c07e00275".decodeHex())
+        val cosmosSignature = sdk.cosmos.parseSignature(ur)
         assertEquals(cosmosSignature.requestId, "7afd5e09-9267-43fb-a02e-08c4a09417ec")
         assertEquals(cosmosSignature.signature, "78325c2ea8d1841dbcd962e894ca6ecd5890aa4c1aa9e1eb789cd2d0e9c22ec737c2b4fb9c2defd863cadf914f538330ec42d6c30c04857ee1f06e7f2589d7d9")
         assertEquals(cosmosSignature.publicKey, "03f3ded94f2969d76200c6ed5db836041cc815fa62aa791e047905186c07e00275")

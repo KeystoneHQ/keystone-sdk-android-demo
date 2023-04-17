@@ -13,8 +13,11 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import com.keystone.module.CosmosAccount
 import com.keystone.module.CosmosSignRequest
+import com.keystone.module.EthSignRequest
+import com.keystone.module.SolSignRequest
 import com.keystone.sdk.KeystoneCosmosSDK
 import com.keystone.module.TokenInfo
+import com.keystone.module.TronSignRequest
 import com.keystone.sdk.KeystoneEthereumSDK
 import com.keystone.sdk.KeystoneSDK
 import com.keystone.sdk.KeystoneSolanaSDK
@@ -69,7 +72,9 @@ class PlayerFragment : Fragment() {
         val signType = KeystoneSolanaSDK.SignType.Message
         val sdk = KeystoneSDK()
         KeystoneSDK.maxFragmentLen = 100
-        return sdk.sol.generateSignRequest(requestId, signData, path, xfp, address, origin, signType)
+        return sdk.sol.generateSignRequest(SolSignRequest(
+            requestId, signData, path, xfp, address, origin, signType
+        ))
     }
 
     private fun genEthQRCode(): UREncoder {
@@ -84,16 +89,9 @@ class PlayerFragment : Fragment() {
         // tx to ur encoder
         val sdk = KeystoneSDK()
         KeystoneSDK.maxFragmentLen = 500
-        return sdk.eth.generateSignRequest(
-            requestId,
-            signData,
-            dataType,
-            60,
-            path,
-            xfp,
-            address,
-            origin
-        )
+        return sdk.eth.generateSignRequest(EthSignRequest(
+            requestId, signData, dataType, 60, path, xfp, address, origin
+        ))
     }
 
     private fun genCosmosQRCode(): UREncoder {
@@ -140,7 +138,9 @@ class PlayerFragment : Fragment() {
         val origin = ""
         val sdk = KeystoneSDK()
         KeystoneSDK.maxFragmentLen = 300
-        return sdk.tron.generateSignRequest(requestId, signData, path, xfp, tokenInfo, address, origin)
+        return sdk.tron.generateSignRequest(TronSignRequest(
+            requestId, signData, path, xfp, tokenInfo, address, origin
+        ))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

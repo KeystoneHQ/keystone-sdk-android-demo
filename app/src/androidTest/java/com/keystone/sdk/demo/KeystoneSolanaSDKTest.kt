@@ -1,12 +1,14 @@
 package com.keystone.sdk.demo
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.keystone.module.SolSignRequest
 import com.keystone.sdk.KeystoneSDK
 
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import com.keystone.sdk.KeystoneSolanaSDK
+import com.sparrowwallet.hummingbird.UR
 import org.junit.Assert.*
 
 /**
@@ -19,7 +21,8 @@ class KeystoneSolanaSDKTest {
     @Test
     fun parseSignature() {
         val sdk = KeystoneSDK()
-        val solSignature = sdk.sol.parseSignature("a201d825509b1deb4d3b7d4bad9bdd2b0d7b3dcb6d025840d4f0a7bcd95bba1fbb1051885054730e3f47064288575aacc102fbbf6a9a14daa066991e360d3e3406c20c00a40973eff37c7d641e5b351ec4a99bfe86f335f7")
+        val ur = UR("sol-signature", "a201d825509b1deb4d3b7d4bad9bdd2b0d7b3dcb6d025840d4f0a7bcd95bba1fbb1051885054730e3f47064288575aacc102fbbf6a9a14daa066991e360d3e3406c20c00a40973eff37c7d641e5b351ec4a99bfe86f335f7".decodeHex())
+        val solSignature = sdk.sol.parseSignature(ur)
         assertEquals(solSignature.signature, "d4f0a7bcd95bba1fbb1051885054730e3f47064288575aacc102fbbf6a9a14daa066991e360d3e3406c20c00a40973eff37c7d641e5b351ec4a99bfe86f335f7")
         assertEquals(solSignature.requestId, "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d")
     }
@@ -36,7 +39,8 @@ class KeystoneSolanaSDKTest {
 
         val sdk = KeystoneSDK()
         KeystoneSDK.maxFragmentLen = 100
-        val res = sdk.sol.generateSignRequest(requestId, signData, path, xfp, address, origin, signType)
+        val solSignRequest = SolSignRequest(requestId, signData, path, xfp, address, origin, signType)
+        val res = sdk.sol.generateSignRequest(solSignRequest)
         assertEquals(
             res.nextPart(),
             "ur:sol-sign-request/1-3/lpadaxcstdcyrssgcarohdfgonadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdmtadaeadaxsptpfwoewnlbtspkrpaytodmonecolwlhdurzscxsgyninqdflrhbysschcfihgubsmdkocxprderdvorhgsdijofzjl"

@@ -65,7 +65,7 @@ class ScannerFragment : Fragment() {
                 qrScanIntegrator.initiateScan()
                 return
             }
-            val accounts = sdk.parseMultiAccounts(decodedQR.cbor)
+            val accounts = sdk.parseMultiAccounts(decodedQR)
             binding.scanResult.text = Gson().toJson(accounts)
         } catch (err: Exception) {
             binding.scanResult.text = Gson().toJson(decodedQR)

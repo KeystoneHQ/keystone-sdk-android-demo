@@ -2,7 +2,9 @@ package com.keystone.sdk.demo
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.keystone.module.TokenInfo
+import com.keystone.module.TronSignRequest
 import com.keystone.sdk.KeystoneSDK
+import com.sparrowwallet.hummingbird.UR
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,7 +22,8 @@ class KeystoneTronSDKTest {
     @Test
     fun parseSignature() {
         val sdk = KeystoneSDK()
-        val signature = sdk.sol.parseSignature("a201d825509b1deb4d3b7d4bad9bdd2b0d7b3dcb6d02584147b1f77b3e30cfbbfa41d795dd34475865240617dd1c5a7bad526f5fd89e52cd057c80b665cc2431efab53520e2b1b92a0425033baee915df858ca1c588b0a1800")
+        val ur = UR("tron-signature", "a201d825509b1deb4d3b7d4bad9bdd2b0d7b3dcb6d02584147b1f77b3e30cfbbfa41d795dd34475865240617dd1c5a7bad526f5fd89e52cd057c80b665cc2431efab53520e2b1b92a0425033baee915df858ca1c588b0a1800".decodeHex())
+        val signature = sdk.tron.parseSignature(ur)
         assertEquals(signature.signature, "47b1f77b3e30cfbbfa41d795dd34475865240617dd1c5a7bad526f5fd89e52cd057c80b665cc2431efab53520e2b1b92a0425033baee915df858ca1c588b0a1800")
         assertEquals(signature.requestId, "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d")
     }
@@ -41,9 +44,10 @@ class KeystoneTronSDKTest {
 
         val sdk = KeystoneSDK()
         KeystoneSDK.maxFragmentLen = 100
-        val res = sdk.tron.generateSignRequest(requestId, signData, path, xfp, tokenInfo, address, origin)
+        val tronSignRequest = TronSignRequest(requestId, signData, path, xfp, tokenInfo, address, origin)
+        val res = sdk.tron.generateSignRequest(tronSignRequest)
         assertEquals(
-            "ur:tron-sign-request/1-5/lpadahcfadrtcygakkdwnlhdhtotadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohkadmhkgcpiajljtjyjphsiajyfpieiejpihjkjkcpftcpghfwfpjlemgdglkkgrjleseehkhggojsehfxjkeygsfwfgksjeisghjoisjtfpfeeeghcpdwcpiyihihcpftehdydyosfdcwjo",
+            "ur:tron-sign-request/1-5/lpadahcfadrfcybsrpdpdlhdhkotadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohkadlkkgcpiajljtjyjphsiajyfpieiejpihjkjkcpftcpghfwfpjlemgdglkkgrjleseehkhggojsehfxjkeygsfwfgksjeisghjoisjtfpfeeeghcpdwcpiyihihcpftehdytiwptifp",
             res.nextPart(),
         )
     }
