@@ -292,7 +292,7 @@ class PlayerFragment : Fragment() {
         )
         val sdk = KeystoneSDK()
         KeystoneSDK.maxFragmentLen = 400
-        return sdk.bch.generateSignRequest(KeystoneSignRequest(
+        return sdk.dash.generateSignRequest(KeystoneSignRequest(
             "cc946be2-8e4c-42be-a321-56a53a8cf516",
             signData,
             "F23F9FD2",
