@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="chain_spinner_options">
+        <item>Bitcoin</item>
+        <item>Ethereum</item>
+        <item>Solana</item>
+        <item>Cosmos</item>
+        <item>Aptos</item>
+        <item>Tron</item>
+        <item>Litecoin</item>
+        <item>BitcoinCash</item>
+        <item>Dash</item>
+    </string-array>
+</resources>

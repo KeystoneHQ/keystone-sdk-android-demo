@@ -75,6 +75,7 @@ class ScannerFragment : Fragment() {
         } catch (err: Exception) {
             if (decodedQR != null) {
                 binding.scanResult.text = Gson().toJson(UR(decodedQR.type, decodedQR.cborBytes.toHexString()))
+                println(decodedQR.cborBytes.toHexString())
             }
             Toast.makeText(binding.root.context, err.message, Toast.LENGTH_LONG).show()
         }
