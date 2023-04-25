@@ -82,7 +82,9 @@ class KeystoneSDKTest {
             "032f547fd525b6d83cc2c44f939cc1425fa1e98d97d26b00f9e2d04952933c5128",
             "b92b17b393612fc8e945e5c5389439ca0c0a28c3076c060b15c3f9f6523a9d19",
             "52006ea0",
-            "account.standard"
+            "account.standard",
+            "44'/60'/0'",
+            "xpub6DNZW8rxA28BGjbbjJEHhsAbYYyFpJJWN52biwHvLS1kTeJ2j2xzcf41oTQ7o5h5udaHqb6NLxei5tZ8fbjBziZajSY4TmrPC4ftcK8pLZ3"
         )
 
         assertEquals(expectedResult, hdKey)
@@ -99,7 +101,9 @@ class KeystoneSDKTest {
             "02fef03a2bd3de113f1dc1cdb1e69aa4d935dc3458d542d796f5827abbb1a58b5e",
             "",
             "52006ea0",
-            "account.ledger_live"
+            "account.ledger_live",
+            "44'/60'/0'/0/0",
+            "xpub6FR3GHXGtwxbXPaU74qA1ATwrJ6gcnYhKmeK2DZyJrNJsMQZY3tkw6nTrJNnHhJVgEzc9Twbco7vCdQnw6ZCr2VCFzaQDf3v4nCFAQLQ6nn"
         )
 
         assertEquals(10, multiHdHeys.hdKeys.size)
