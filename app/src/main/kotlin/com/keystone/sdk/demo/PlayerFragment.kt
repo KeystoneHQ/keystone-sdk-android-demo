@@ -24,6 +24,7 @@ import com.keystone.module.EthSignRequest
 import com.keystone.module.Input
 import com.keystone.module.KeystoneSignRequest
 import com.keystone.module.LtcTx
+import com.keystone.module.NearSignRequest
 import com.keystone.module.Output
 import com.keystone.module.SolSignRequest
 import com.keystone.sdk.KeystoneCosmosSDK
@@ -298,6 +299,20 @@ class PlayerFragment : Fragment() {
             "F23F9FD2",
             "BCH Wallet"
         ))
+    }
+
+    private fun genNearQRCode(): UREncoder {
+        val requestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+        val signData = arrayListOf("4000000039666363303732306130313664336331653834396438366231366437313339653034336566633438616464316337386633396333643266303065653938633037009FCC0720A016D3C1E849D86B16D7139E043EFC48ADD1C78F39C3D2F00EE98C07823E0CA1957100004000000039666363303732306130313664336331653834396438366231366437313339653034336566633438616464316337386633396333643266303065653938633037F0787E1CB1C22A1C63C24A37E4C6C656DD3CB049E6B7C17F75D01F0859EFB7D80100000003000000A1EDCCCE1BC2D3000000000000")
+        val path = "m/44'/397'/0'"
+        val xfp = "F23F9FD2"
+        val account = ""
+        val origin = "near wallet"
+
+        val sdk = KeystoneSDK()
+        KeystoneSDK.maxFragmentLen = 500
+        val signRequest = NearSignRequest(requestId, signData, path, xfp, account, origin)
+        return sdk.near.generateSignRequest(signRequest)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
