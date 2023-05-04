@@ -16,6 +16,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import com.keystone.module.AptosAccount
 import com.keystone.module.AptosSignRequest
+import com.keystone.module.ArweaveSignRequest
 import com.keystone.module.CashInput
 import com.keystone.module.CashTx
 import com.keystone.module.CosmosAccount
@@ -32,6 +33,7 @@ import com.keystone.module.TokenInfo
 import com.keystone.module.TronSignRequest
 import com.keystone.module.UTXO
 import com.keystone.sdk.KeystoneAptosSDK
+import com.keystone.sdk.KeystoneArweaveSDK
 import com.keystone.sdk.KeystoneEthereumSDK
 import com.keystone.sdk.KeystoneSDK
 import com.keystone.sdk.KeystoneSolanaSDK
@@ -313,6 +315,21 @@ class PlayerFragment : Fragment() {
         KeystoneSDK.maxFragmentLen = 500
         val signRequest = NearSignRequest(requestId, signData, path, xfp, account, origin)
         return sdk.near.generateSignRequest(signRequest)
+    }
+
+    private fun genArweaveQRCode(): UREncoder {
+        val requestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+        val signData = "7b22666f726d6174223a322c226964223a22222c226c6173745f7478223a22675448344631615059587639314a704b6b6e39495336684877515a3141597949654352793251694f654145547749454d4d5878786e466a30656b42466c713939222c226f776e6572223a22222c2274616773223a5b7b226e616d65223a2256486c775a51222c2276616c7565223a2256484a68626e4e6d5a5849227d2c7b226e616d65223a22513278705a573530222c2276616c7565223a2251584a44623235755a574e30227d2c7b226e616d65223a22513278705a5735304c565a6c636e4e70623234222c2276616c7565223a224d5334774c6a49227d5d2c22746172676574223a226b796977315934796c7279475652777454617473472d494e3965773838474d6c592d795f4c473346784741222c227175616e74697479223a2231303030303030303030222c2264617461223a22222c22646174615f73697a65223a2230222c22646174615f726f6f74223a22222c22726577617264223a2239313037353734333836222c227369676e6174757265223a22227d"
+        val masterFingerprint = "F23F9FD2"
+        val account = ""
+        val origin = "arweave wallet"
+        val signType = KeystoneArweaveSDK.SignType.Transaction
+        val saltLen = KeystoneArweaveSDK.SaltLen.Zero
+
+        val sdk = KeystoneSDK()
+        KeystoneSDK.maxFragmentLen = 500
+        val signReq = ArweaveSignRequest(requestId, signData, signType, saltLen, masterFingerprint, account, origin)
+        return sdk.arweave.generateSignRequest(signReq)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

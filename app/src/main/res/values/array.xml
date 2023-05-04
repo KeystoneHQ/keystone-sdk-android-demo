@@ -11,5 +11,6 @@
         <item>BitcoinCash</item>
         <item>Dash</item>
         <item>Near</item>
+        <item>Arweave</item>
     </string-array>
 </resources>
