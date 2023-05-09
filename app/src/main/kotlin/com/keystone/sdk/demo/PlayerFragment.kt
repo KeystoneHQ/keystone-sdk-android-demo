@@ -144,20 +144,19 @@ class PlayerFragment : Fragment() {
 
     private fun genTronQRCode(): UREncoder {
         val requestId = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
-        val signData = "0a0207902208e1b9de559665c6714080c49789bb2c5aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a1541c79f045e4d48ad8dae00e6a6714dae1e000adfcd1215410d292c98a5eca06c2085fff993996423cf66c93b2244a9059cbb0000000000000000000000009bbce520d984c3b95ad10cb4e32a9294e6338da300000000000000000000000000000000000000000000000000000000000f424070c0b6e087bb2c90018094ebdc03"
-        val path = "m/44'/195'/0'/0'"
-        val xfp = "12121212"
+        val signData = "0a0207902208e1b9de559665c6714080c49789bb2c5aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a15418dfec1cde1fe6a9ec38a16c7d67073e3020851c0121541a614f803b6fd780986a42c78ec9c7f77e6ded13c2244a9059cbb0000000000000000000000009c0279f1bda9fc40a85f1b53c306602864533e73000000000000000000000000000000000000000000000000000000000098968070c0b6e087bb2c90018094ebdc03"
+        val path = "m/44'/195'/0'/0/0"
+        val xfp = "F23F9FD2"
         val tokenInfo = TokenInfo(
-            "TONE",
-            "TronOne",
-            18
+            "TRON_USDT",
+            "USDT",
+            6
         )
-        val address = ""
         val origin = ""
         val sdk = KeystoneSDK()
         KeystoneSDK.maxFragmentLen = 300
         return sdk.tron.generateSignRequest(TronSignRequest(
-            requestId, signData, path, xfp, tokenInfo, address, origin
+            requestId, signData, path, xfp, tokenInfo, origin
         ))
     }
 
