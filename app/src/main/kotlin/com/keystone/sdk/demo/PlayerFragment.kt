@@ -16,6 +16,9 @@ import com.google.zxing.qrcode.QRCodeWriter
 import com.keystone.module.AptosAccount
 import com.keystone.module.AptosSignRequest
 import com.keystone.module.ArweaveSignRequest
+import com.keystone.module.CardanoCertKey
+import com.keystone.module.CardanoSignRequest
+import com.keystone.module.CardanoUtxo
 import com.keystone.module.CashInput
 import com.keystone.module.CashTx
 import com.keystone.module.CosmosAccount
@@ -348,6 +351,50 @@ class PlayerFragment : Fragment() {
         KeystoneSDK.maxFragmentLen = 500
         val signReq = ArweaveSignRequest(requestId, signData, signType, saltLen, masterFingerprint, account, origin)
         return sdk.arweave.generateSignRequest(signReq)
+    }
+
+    private fun genCardanoQRCode(): UREncoder {
+        val utxos = ArrayList<CardanoUtxo>();
+        utxos.add(
+            CardanoUtxo(
+                "4e3a6e7fdcb0d0efa17bf79c13aed2b4cb9baf37fb1aa2e39553d5bd720c5c99",
+                3,
+                10000000,
+                "73c5da0a",
+                "m/1852'/1815'/0'/0/0",
+                "addr1qy8ac7qqy0vtulyl7wntmsxc6wex80gvcyjy33qffrhm7sh927ysx5sftuw0dlft05dz3c7revpf7jx0xnlcjz3g69mq4afdhv"
+            )
+        )
+        utxos.add(
+            CardanoUtxo(
+                "4e3a6e7fdcb0d0efa17bf79c13aed2b4cb9baf37fb1aa2e39553d5bd720c5c99",
+                4,
+                18020000,
+                "73c5da0a",
+                "m/1852'/1815'/0'/0/1",
+                "addr1qyz85693g4fr8c55mfyxhae8j2u04pydxrgqr73vmwpx3azv4dgkyrgylj5yl2m0jlpdpeswyyzjs0vhwvnl6xg9f7ssrxkz90"
+            )
+        )
+
+        val certKeys = ArrayList<CardanoCertKey>();
+        certKeys.add(
+            CardanoCertKey(
+                "e557890352095f1cf6fd2b7d1a28e3c3cb029f48cf34ff890a28d176",
+                "73c5da0a",
+                "m/1852'/1815'/0'/2/0"
+            )
+        )
+
+        val cardanoSignRequest = CardanoSignRequest(
+            "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+            "84a400828258204e3a6e7fdcb0d0efa17bf79c13aed2b4cb9baf37fb1aa2e39553d5bd720c5c99038258204e3a6e7fdcb0d0efa17bf79c13aed2b4cb9baf37fb1aa2e39553d5bd720c5c99040182a200581d6179df4c75f7616d7d1fd39cbc1a6ea6b40a0d7b89fea62fc0909b6c370119c350a200581d61c9b0c9761fd1dc0404abd55efc895026628b5035ac623c614fbad0310119c35002198ecb0300a0f5f6",
+            utxos,
+            certKeys,
+            "cardano-wallet",
+        )
+
+        val sdk = KeystoneSDK()
+        return sdk.cardano.generateSignRequest(cardanoSignRequest)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
