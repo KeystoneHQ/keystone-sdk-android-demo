@@ -57,7 +57,7 @@ dependencies {
     implementation 'com.sparrowwallet:hummingbird:1.6.6'
 
     // import remote package
-    implementation 'com.github.KeystoneHQ:keystone-sdk-android:0.4.0'
+    implementation 'com.github.KeystoneHQ:keystone-sdk-android:0.4.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation "io.mockk:mockk-android:1.13.5"
