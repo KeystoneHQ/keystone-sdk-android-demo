@@ -14,5 +14,6 @@
         <item>Arweave</item>
         <item>Sui</item>
         <item>Cardano</item>
+        <item>Evm</item>
     </string-array>
 </resources>
